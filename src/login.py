@@ -5,6 +5,6 @@ def login():
     senha = input("Digite sua senha: ")
 
     if verificarUsuario(email, senha):
-        print("Login bem-sucedido!")
+        print("\nLogin bem-sucedido!")
     else:
-        print("E-mail ou senha incorretos!")
+        print("\nE-mail ou senha incorretos!")

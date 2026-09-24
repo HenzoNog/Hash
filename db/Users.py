@@ -44,7 +44,7 @@ def verificarUsuario(email, senha):
     salt = cur.execute("SELECT salt FROM users WHERE email = ?", (email,)).fetchone()
     
     if salt is None:           # Se o email não existir, cria um salt aleatório para não dar pistas sobre a existência do usuário
-        salt = os.urandom(16)
+        salt = [os.urandom(16),]
         
     senha_hash = hashSenha(senha, salt[0]) if salt else None
 

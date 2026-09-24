@@ -1,13 +1,20 @@
-import re
 import db.Users as criarBanco
 
 def main():
     criarBanco.criarBanco()
 
     while True:
-        print("1. Cadastrar usuário")
-        print("2. Fazer login")
-        print("3. Sair")
+        print(f"""==========================================
+      Hash e senhas em banco de dados
+
+        Menu de opções:
+        
+        1. Cadastrar usuário
+        2. Fazer login
+        3. Sair
+==========================================
+        """)
+
         opcao = input("Escolha uma opção: ")
 
         if opcao == "1":
@@ -19,6 +26,6 @@ def main():
         elif opcao == "3":
             break
         else:
-            print("Opção inválida!")
+            print("\n\n⚠️  ⚠️  ⚠️   Opção inválida! ⚠️  ⚠️  ⚠️")
 
 main()

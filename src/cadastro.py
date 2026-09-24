@@ -10,12 +10,12 @@ def cadastro():
             email = validate_email(email).email
             break
         except EmailNotValidError as e:
-            print(f"E-mail inválido! Por favor, insira um e-mail válido.\n: {str(e)}")
+            print(f"\n\n⚠️  ⚠️  ⚠️   E-mail inválido! Por favor, insira um e-mail válido.\n: {str(e)}")
 
     while True:
         senha = input("Digite sua senha: ")
         if not validarSenha(senha):
-            print("Senha inválida! A senha deve conter pelo menos uma letra maiúscula, uma letra minúscula, um número, um caractere especial e ter exatamente 8 caracteres.")
+            print("\n⚠️  ⚠️  ⚠️   Senha inválida! A senha deve conter pelo menos uma letra maiúscula, uma letra minúscula, um número, um caractere especial e ter exatamente 8 caracteres.")
         else:
             break
         
