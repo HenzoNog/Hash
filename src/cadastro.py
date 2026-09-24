@@ -1,21 +1,29 @@
-import re
-import hashlib
-from Users.py import cadastrarUsuario
+import os
+from email_validator import validate_email, EmailNotValidError
+from db.Users import cadastrarUsuario
+from src.validaSenha import validarSenha, hashSenha
 
 def cadastro():
+    while True:
+        email = input("Digite seu e-mail: ")
+        try:
+            email = validate_email(email).email
+            break
+        except EmailNotValidError as e:
+            print(f"E-mail inválido! Por favor, insira um e-mail válido.\n: {str(e)}")
 
-    email = input("Digite seu e-mail: ")
-    senha = input("Digite sua senha: ")
+    while True:
+        senha = input("Digite sua senha: ")
+        if not validarSenha(senha):
+            print("Senha inválida! A senha deve conter pelo menos uma letra maiúscula, uma letra minúscula, um número, um caractere especial e ter exatamente 8 caracteres.")
+        else:
+            break
+        
+    salt = os.urandom(16)
+        
+    senha_hash = hashSenha(senha, salt)
 
-    if not re.fullmatch(r"(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8}", senha):
-        print("Senha inválida!")
-        return
-    senha_hash = hashlib.sha256(senha.encode()).hexdigest()   
-    #O encode transforma o texto em formato String enviado em bytes para a hashlib 
-    #hashlibg.sha256 é o algoritmo matematico do sha256 que processa o bytes que vai ser feito pelo .encode
-    #O hexdigest() pega os bytes gerados e retorna uma String para ser armazenada, lida e analisada
-
-    success=cadastrarUsuario(email, senha_hash)
+    success=cadastrarUsuario(email, senha_hash, salt)
 
     if success:
         print("Usuário cadastrado com sucesso!")
